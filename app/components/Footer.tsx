@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
@@ -9,11 +10,13 @@ export function Footer() {
         <div className="text-center mb-8">
           {/* Logo Image */}
           <div className="flex justify-center mb-6">
-            <ImageWithFallback
-              src="https://centro.encantotown.mn/images/cento-logo.webp"
-              alt="Өндөр зэрэглэлийн орон сууц Logo"
-              className="h-16 w-auto"
-            />
+            <Link href="/">
+              <ImageWithFallback
+                src="https://centro.encantotown.mn/images/cento-logo.webp"
+                alt="Өндөр зэрэглэлийн орон сууц Logo"
+                className="h-16 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Brand Name */}
@@ -24,10 +27,29 @@ export function Footer() {
           </h3>
 
           {/* Brief Description */}
-          <p className="text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-white/70 max-w-2xl mx-auto mb-6 leading-relaxed">
             Орчин үеийн тансаг амьдралын орчинг бүрдүүлэх хотын
             төвийн орон сууцны төсөл
           </p>
+
+          {/* Internal Links */}
+          <nav className="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+            <Link href="/" className="text-white/70 hover:text-white transition-colors">
+              Нүүр
+            </Link>
+            <Link href="#танилцуулга" className="text-white/70 hover:text-white transition-colors">
+              Танилцуулга
+            </Link>
+            <Link href="#орон-сууц" className="text-white/70 hover:text-white transition-colors">
+              Орон сууц
+            </Link>
+            <Link href="/commercial" className="text-white/70 hover:text-white transition-colors">
+              Үйлчилгээний талбай
+            </Link>
+            <Link href="#уулзалт" className="text-white/70 hover:text-white transition-colors">
+              Холбоо барих
+            </Link>
+          </nav>
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-8">

@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       type: "website",
       locale: "mn_MN",
-      url: `https://encantocentro.mn/apartment/${id}`,
+      url: `/apartment/${id}`,
       siteName: "Encanto Centro",
       title,
       description,
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       },
     },
     alternates: {
-      canonical: `https://encantocentro.mn/apartment/${id}`,
+      canonical: `/apartment/${id}`,
     },
   };
 }

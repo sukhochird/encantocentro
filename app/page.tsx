@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { HomePageClient } from "./components/HomePageClient";
 
 export const metadata: Metadata = {
-  title: "Encanto Centro - Орчин үеийн орон сууцны цогцолбор | Улаанбаатар",
-  description: "ENCANTO CENTRO 1 High-Rise Residence - Дэлхийн №1 YUANDA брэндийн шилэн фасад бүхий, орон зайн оновчтой төлөвлөлттэй тансаг зэрэглэлийн орон сууц, худалдаа үйлчилгээний төв. 600 орон сууц, 24,000м² худалдааны төв, 950 автомашины зогсоол.",
+  title: "Encanto Centro - Орчин үеийн орон сууцны цогцолбор",
+  description: "Дэлхийн №1 YUANDA брэндийн шилэн фасад бүхий тансаг зэрэглэлийн орон сууц, худалдаа үйлчилгээний төв. 600 орон сууц, 24,000м² худалдааны төв, 950 автомашины зогсоол. Улаанбаатар хотод байрладаг орчин үеийн барилга.",
   keywords: [
     "Encanto Centro",
     "орон сууц",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://encantocentro.mn",
+    canonical: "/",
   },
 };
 

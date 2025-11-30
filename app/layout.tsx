@@ -10,8 +10,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Encanto Centro",
-  description: "Энканто Сентро - Орчин үеийн орон сууцны цогцолбор",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://encantocentro.mn"),
+  title: {
+    default: "Encanto Centro - Орчин үеийн орон сууцны цогцолбор",
+    template: "%s | Encanto Centro",
+  },
+  description: "Энканто Сентро - Орчин үеийн орон сууцны цогцолбор. Дэлхийн №1 YUANDA брэндийн шилэн фасад бүхий тансаг зэрэглэлийн орон сууц, худалдаа үйлчилгээний төв.",
 };
 
 export default function RootLayout({

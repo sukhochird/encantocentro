@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "mn_MN",
-    url: "https://encantocentro.mn/commercial",
+      url: "/commercial",
     siteName: "Encanto Centro",
     title: "Үйлчилгээний талбай - Encanto Centro",
     description: "4 давхар, 24,000м² талбай бүхий орчин үеийн худалдааны төв",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://encantocentro.mn/commercial",
+    canonical: "/commercial",
   },
 };
 
