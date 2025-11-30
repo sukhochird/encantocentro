@@ -24,32 +24,32 @@ export function Header({
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window === "undefined") return;
-      
+
       setIsScrolled(window.scrollY > 50);
-      
+
       // Determine active section based on scroll position
       const sections = [
         { id: "танилцуулга" },
         { id: "орон-сууц" },
         { id: "уулзалт" },
       ];
-      
+
       // Find the section that is most visible in the viewport
       let currentSection = "";
       let maxVisibility = 0;
-      
+
       sections.forEach((section) => {
         const element = document.getElementById(section.id);
         if (element) {
           const rect = element.getBoundingClientRect();
           const viewportHeight = window.innerHeight;
-          
+
           // Calculate how much of the section is visible
           const visibleTop = Math.max(0, -rect.top);
           const visibleBottom = Math.max(0, rect.bottom - viewportHeight);
           const visibleHeight = rect.height - visibleTop - visibleBottom;
           const visibility = Math.max(0, visibleHeight) / rect.height;
-          
+
           // If this section is more visible and is in the viewport, make it active
           if (visibility > maxVisibility && rect.top < viewportHeight * 0.5 && rect.bottom > 0) {
             maxVisibility = visibility;
@@ -57,7 +57,7 @@ export function Header({
           }
         }
       });
-      
+
       setActiveSection(currentSection);
     };
 
@@ -66,7 +66,7 @@ export function Header({
       // Check on mount and after a short delay to ensure DOM is ready
       setTimeout(handleScroll, 100);
       handleScroll();
-      
+
       return () => window.removeEventListener("scroll", handleScroll);
     }
   }, [pathname]);
@@ -100,15 +100,14 @@ export function Header({
       <div className="max-w-6xl mx-auto px-6">
         {/* Rounded Container for entire header */}
         <div
-          className={`bg-background/95 backdrop-blur-md rounded-full border border-border transition-all duration-300 ${
-            isScrolled ? "shadow-lg bg-background/98" : "shadow-sm"
-          }`}
+          className={`bg-background/95 backdrop-blur-md rounded-full border border-border transition-all duration-300 ${isScrolled ? "shadow-lg bg-background/98" : "shadow-sm"
+            }`}
         >
           <div className="px-6 py-3 flex items-center justify-between">
             {/* Logo */}
             <button
               onClick={handleLogoClick}
-              className="font-medium text-xl text-black hover:text-primary transition-colors cursor-pointer"
+              className="font-medium text-xl text-foreground hover:text-primary transition-colors cursor-pointer"
             >
               ENCANTO CENTRO
             </button>
@@ -118,41 +117,37 @@ export function Header({
               <div className="flex items-center space-x-1">
                 <button
                   onClick={() => handleNavigation('танилцуулга')}
-                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
-                    activeSection === 'танилцуулга'
+                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${activeSection === 'танилцуулга'
                       ? 'text-primary bg-primary/10'
-                      : 'text-black hover:bg-accent'
-                  }`}
+                      : 'text-foreground hover:bg-accent'
+                    }`}
                 >
                   Танилцуулга
                 </button>
                 <button
                   onClick={onNavigateToCommercial}
-                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
-                    pathname === '/commercial'
+                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${pathname === '/commercial'
                       ? 'text-primary bg-primary/10'
-                      : 'text-black hover:bg-accent'
-                  }`}
+                      : 'text-foreground hover:bg-accent'
+                    }`}
                 >
                   Үйлчилгээний талбай
                 </button>
                 <button
                   onClick={() => handleNavigation('орон-сууц')}
-                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
-                    activeSection === 'орон-сууц'
+                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${activeSection === 'орон-сууц'
                       ? 'text-primary bg-primary/10'
-                      : 'text-black hover:bg-accent'
-                  }`}
+                      : 'text-foreground hover:bg-accent'
+                    }`}
                 >
                   Орон сууц
                 </button>
                 <button
                   onClick={() => handleNavigation('уулзалт')}
-                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${
-                    activeSection === 'уулзалт'
+                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${activeSection === 'уулзалт'
                       ? 'text-primary bg-primary/10'
-                      : 'text-black hover:bg-accent'
-                  }`}
+                      : 'text-foreground hover:bg-accent'
+                    }`}
                 >
                   Холбоо барих
                 </button>
@@ -164,12 +159,12 @@ export function Header({
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-full text-black hover:bg-accent transition-all duration-200 cursor-pointer"
+                className="p-2 rounded-full text-foreground hover:bg-accent transition-all duration-200 cursor-pointer"
                 aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              
+
               {/* CTA Button */}
               <Button
                 onClick={() => handleNavigation('уулзалт')}
@@ -184,16 +179,16 @@ export function Header({
               {/* Dark Mode Toggle Mobile */}
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-full text-black hover:bg-accent transition-colors cursor-pointer"
+                className="p-2 rounded-full text-foreground hover:bg-accent transition-colors cursor-pointer"
                 aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
-              
+
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-black hover:bg-accent p-2 rounded-full transition-colors cursor-pointer"
+                className="text-foreground hover:bg-accent p-2 rounded-full transition-colors cursor-pointer"
               >
                 {isMenuOpen ? (
                   <X size={20} />
@@ -214,11 +209,10 @@ export function Header({
                   setIsMenuOpen(false);
                   handleNavigation('танилцуулга');
                 }}
-                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${
-                  activeSection === 'танилцуулга'
+                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${activeSection === 'танилцуулга'
                     ? 'text-primary bg-primary/10'
-                    : 'text-black hover:bg-accent'
-                }`}
+                    : 'text-foreground hover:bg-accent'
+                  }`}
               >
                 Танилцуулга
               </button>
@@ -227,11 +221,10 @@ export function Header({
                   setIsMenuOpen(false);
                   onNavigateToCommercial?.();
                 }}
-                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${
-                  pathname === '/commercial'
+                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${pathname === '/commercial'
                     ? 'text-primary bg-primary/10'
-                    : 'text-black hover:bg-accent'
-                }`}
+                    : 'text-foreground hover:bg-accent'
+                  }`}
               >
                 Үйлчилгээний талбай
               </button>
@@ -240,11 +233,10 @@ export function Header({
                   setIsMenuOpen(false);
                   handleNavigation('орон-сууц');
                 }}
-                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${
-                  activeSection === 'орон-сууц'
+                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${activeSection === 'орон-сууц'
                     ? 'text-primary bg-primary/10'
-                    : 'text-black hover:bg-accent'
-                }`}
+                    : 'text-foreground hover:bg-accent'
+                  }`}
               >
                 Орон сууц
               </button>
@@ -253,11 +245,10 @@ export function Header({
                   setIsMenuOpen(false);
                   handleNavigation('уулзалт');
                 }}
-                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${
-                  activeSection === 'уулзалт'
+                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${activeSection === 'уулзалт'
                     ? 'text-primary bg-primary/10'
-                    : 'text-black hover:bg-accent'
-                }`}
+                    : 'text-foreground hover:bg-accent'
+                  }`}
               >
                 Холбоо барих
               </button>
