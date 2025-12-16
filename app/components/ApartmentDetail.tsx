@@ -22,12 +22,6 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "./ui/tabs";
-import {
   ArrowLeft,
   Calculator,
   Phone,
@@ -46,10 +40,6 @@ import {
   RotateCcw,
   MousePointer2,
   ExternalLink,
-  Sun,
-  Leaf,
-  Snowflake,
-  Flower,
 } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 const golomtBankLogo = "/assets/522610c4c218c793e228baca803a214b83a12545.png";
@@ -291,9 +281,11 @@ function PanoramaViewer({
             <p className="text-sm font-medium">{title}</p>
           </div>
 
-          <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm text-white px-3 py-1 rounded-full z-30">
-            <span className="text-sm">{season}</span>
-          </div>
+          {season && (
+            <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm text-white px-3 py-1 rounded-full z-30">
+              <span className="text-sm">{season}</span>
+            </div>
+          )}
 
           <div className="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-2 rounded-md z-30">
             <div className="flex items-center gap-2">
@@ -317,13 +309,17 @@ declare global {
 }
 
 // Kuula 360° Virtual Tour Component
-function VirtualTour() {
+interface VirtualTourProps {
+  url: string;
+}
+
+function VirtualTour({ url }: VirtualTourProps) {
   return (
     <Card>
       <CardContent className="p-0">
         <div className="relative w-full overflow-hidden" style={{ height: "620px", minHeight: "620px" }}>
           <iframe
-            src="https://kuula.co/share/collection/7HvsZ?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.02&thumbs=3&alpha=0.87"
+            src={url}
             className="w-full h-full border-0"
             style={{ height: "620px", minHeight: "620px" }}
             allow="fullscreen; vr"
@@ -404,26 +400,115 @@ export function ApartmentDetail({
         (i - 1) % roomDescriptions.length;
       images.push({
         url: `https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/apart-a/A-${i}.jpg`,
-        title: `А загвар - ${243.0}м² - Зураг ${i}`,
+        title: `А загвар - ${253.44}м² - Зураг ${i}`,
         description:
           roomDescriptions[descriptionIndex] +
-          `. 243.0м² талбайтай А загварын тансаг байрны дотоод засал чимэглэл.`,
+          `. 253.44м² талбайтай А загварын тансаг байрны дотоод засал чимэглэл.`,
       });
     }
     return images;
   };
 
+  // Generate image URLs for B model
+  const generateBModelImages = () => {
+    const images: Array<{ url: string; title: string; description: string }> = [];
+    const roomDescriptions = [
+      "Өргөн мастер унтлагын өрөө, панорам харагдацтай",
+      "Тансаг мастер ариун цэврийн өрөө, спа мэт орчинтай",
+      "Том Walk-in хувцасны өрөө, зохион байгуулалт сайтай",
+      "Тав тухтай зочны унтлагын өрөө, гэрэл их ордог",
+      "Орчин үеийн зочны ариун цэврийн өрөө",
+      "Дэд зочны унтлагын өрөө, балконтой холбоотой",
+      "Хоёр дахь зочны ариун цэврийн өрөө",
+      "Өргөн гэр бүлийн амралтын өрөө",
+      "Том амьдрах өрөө, панорам цонхтой",
+      "Тансаг хоолны өрөө, том ширээтэй",
+    ];
+
+    // List of all B model image filenames based on the actual files
+    const bImageFilenames = [
+      "B-1.jpg", "B-2.jpg", "B-3-1.jpg", "B-3-2.jpg", "B-3-3.jpg",
+      "B-4.jpg", "B-5.jpg", "B-6.jpg", "B-6-1.jpg", "B-7.jpg",
+      "B-7-1.jpg", "B-8.jpg", "B-9-1.jpg", "B-10-1.jpg", "B-11.jpg",
+      "B-12.jpg", "B-12-1.jpg", "B-13.jpg", "B-14.jpg", "B-14-1.jpg",
+      "B-15.jpg", "B-16.jpg", "B-17.jpg", "B-18.jpg", "B-19.jpg",
+      "B-20.jpg", "B-21.jpg", "B-22.jpg", "B-23.jpg", "B-24.jpg",
+      "B-25.jpg", "B-26.jpg", "B-27.jpg", "B-28.jpg", "B-29.jpg",
+      "B-30.jpg", "B-31.jpg", "B-32.jpg", "B-33.jpg", "B-34.jpg",
+      "B-35.jpg", "B-36.jpg", "B-37.jpg", "B-38.jpg", "B-39.jpg",
+    ];
+
+    bImageFilenames.forEach((filename, index) => {
+      const descriptionIndex = index % roomDescriptions.length;
+      images.push({
+        url: `https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/apart-b/${filename}`,
+        title: `B загвар - 209.75м² - Зураг ${index + 1}`,
+        description:
+          roomDescriptions[descriptionIndex] +
+          `. 209.75м² талбайтай B загварын тансаг байрны дотоод засал чимэглэл.`,
+      });
+    });
+
+    return images;
+  };
+
+  // Generate image URLs for C model
+  const generateCModelImages = () => {
+    const images: Array<{ url: string; title: string; description: string }> = [];
+    const roomDescriptions = [
+      "Өргөн мастер унтлагын өрөө, панорам харагдацтай",
+      "Тансаг мастер ариун цэврийн өрөө, спа мэт орчинтай",
+      "Том Walk-in хувцасны өрөө, зохион байгуулалт сайтай",
+      "Тав тухтай зочны унтлагын өрөө, гэрэл их ордог",
+      "Орчин үеийн зочны ариун цэврийн өрөө",
+      "Дэд зочны унтлагын өрөө, балконтой холбоотой",
+      "Хоёр дахь зочны ариун цэврийн өрөө",
+      "Өргөн гэр бүлийн амралтын өрөө",
+      "Том амьдрах өрөө, панорам цонхтой",
+      "Тансаг хоолны өрөө, том ширээтэй",
+    ];
+
+    // List of all C model image filenames based on the actual files
+    const cImageFilenames = [
+      "C-01.jpg", "C-02.jpg", "C-03.jpg", "C-04.jpg", "C-05.jpg",
+      "C-06.jpg", "C-07.jpg", "C-08.jpg", "C-09.jpg", "C-10.jpg",
+      "C-11.jpg", "C-12.jpg", "C-13.jpg", "C-14.jpg", "C-15.jpg",
+      "C-16.jpg", "C-16a.jpg", "C-17.jpg", "C-18.jpg", "C-19.jpg",
+      "C-20.jpg", "C-21.jpg", "C-22.jpg", "C-23.jpg", "C-24.jpg",
+      "C-25.jpg", "C-26.jpg", "C-27.jpg", "C-28.jpg", "C-29.jpg",
+    ];
+
+    cImageFilenames.forEach((filename, index) => {
+      const descriptionIndex = index % roomDescriptions.length;
+      images.push({
+        url: `https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/apart-c/${filename}`,
+        title: `C загвар - 144.18м² - Зураг ${index + 1}`,
+        description:
+          roomDescriptions[descriptionIndex] +
+          `. 144.18м² талбайтай C загварын тансаг байрны дотоод засал чимэглэл.`,
+      });
+    });
+
+    return images;
+  };
+
   // Generate A model images for the studio apartment
   const aModelImages = generateAModelImages();
+  
+  // Generate B model images for the 1bedroom apartment
+  const bModelImages = generateBModelImages();
+  
+  // Generate C model images for the 2bedroom apartment
+  const cModelImages = generateCModelImages();
 
   // Mock apartment data - in real app this would come from API
   const apartmentData = {
     studio: {
-      title: "243м² А загвар",
+      title: "253.44м² А загвар",
       subtitle: "4 унтлагын өрөө",
       price: "₮750,000,000 - ₮820,000,000",
       specs: {
-        area: "243м²",
+        area: "253.44м²",
         rooms: "5",
         floors: "17-24",
         bathrooms: "4",
@@ -455,11 +540,11 @@ export function ApartmentDetail({
       virtualTourUrl: "#virtual-tour",
     },
     "1bedroom": {
-      title: "145,5м² B Загвар",
+      title: "209.75м² B Загвар",
       subtitle: "3 өрөө",
       price: "₮450,000,000 - ₮490,000,000",
       specs: {
-        area: "202,4м²",
+        area: "209.75м²",
         rooms: "5",
         floors: "17-24",
         bathrooms: "3+1",
@@ -481,47 +566,16 @@ export function ApartmentDetail({
       floorPlan: apartBFloorPlan,
       heroImage:
         "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/apart-b/B-4.jpg",
-      interiorImages: [
-        {
-          url: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
-          title: "Амьдрах өрөө",
-          description:
-            "Том талбайтай амьдрах өрөө, гэр бүлийн цагийг өнгөрөөхөд тохиромжтой.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop",
-          title: "Хоолны өрөө",
-          description:
-            "Өргөн хоолны өрөө, том ширээ болон зочдод тохиромжтой.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
-          title: "Гал тогооны өрөө",
-          description:
-            "Орчин үеийн техник хэрэгсэлтэй, тохиромжтой хэмжээтэй гал тогооны өрөө.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-          title: "Унтлагын өрөө",
-          description:
-            "Том унтлагын өрөө, ��өрвөлжин цонхтой гэрэл их ордог.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-          title: "Ариун цэврийн өрөө",
-          description:
-            "Орчин үеийн дизайнтай, шикмэг материалаар чимэглэсэн.",
-        },
-      ],
+      interiorImages: bModelImages,
       panoramicView: panoramaImage,
-      virtualTourUrl: "#virtual-tour",
+      virtualTourUrl: "https://kuula.co/share/collection/7HkKb?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.02&thumbs=3&alpha=0.87",
     },
     "2bedroom": {
-      title: "141,5м² С загвар",
+      title: "144,18м² С загвар",
       subtitle: "3 өрөө",
       price: "₮430,000,000 - ₮470,000,000",
       specs: {
-        area: "141,5м²",
+        area: "144,18м²",
         rooms: "3",
         floors: "17-24",
         bathrooms: "3",
@@ -543,39 +597,9 @@ export function ApartmentDetail({
       floorPlan: apartCFloorPlan,
       heroImage:
         "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/apart-c/C-05.jpg",
-      interiorImages: [
-        {
-          url: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop",
-          title: "Амьдрах өрөө",
-          description:
-            "Комфорт төрлийн байрны амьдрах өрөө, тав тухтай орчинтой.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
-          title: "Хоолны өрөө",
-          description:
-            "Гэр бүлийн хамтын цагийг өнгөрөөхөд тохиромжтой орон зай.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
-          title: "Гал тогооны өрөө",
-          description:
-            "Хялбар ашиглахуйц дизайнтай, бүх шаардлагыг хангасан.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-          title: "Унтлагын өрөө",
-          description: "Тайвширч амрахад тохиромжтой орчин.",
-        },
-        {
-          url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-          title: "Ариун цэврийн өрөө",
-          description:
-            "Цэвэр, ариун цэврийн өндөр стандарттай.",
-        },
-      ],
+      interiorImages: cModelImages,
       panoramicView: panoramaImage,
-      virtualTourUrl: "#virtual-tour",
+      virtualTourUrl: "https://kuula.co/share/collection/7HkKN?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.02&thumbs=3&alpha=0.87",
     },
     deluxe: {
       title: "159,5м² D загвар",
@@ -640,11 +664,11 @@ export function ApartmentDetail({
       virtualTourUrl: "#virtual-tour",
     },
     premium: {
-      title: "151,5м² E загвар",
+      title: "158,86м² E загвар",
       subtitle: "4 өрөө",
       price: "₮580,000,000 - ₮620,000,000",
       specs: {
-        area: "159,2м²",
+        area: "158,86м²",
         rooms: "4",
         floors: "6-16",
         bathrooms: "2+1",
@@ -704,11 +728,11 @@ export function ApartmentDetail({
       virtualTourUrl: "#virtual-tour",
     },
     family: {
-      title: "126,5м² F загвар",
+      title: "129,1м² F загвар",
       subtitle: "3 өрөө",
       price: "₮720,000,000 - ₮780,000,000",
       specs: {
-        area: "126,5м²",
+        area: "129,1м²",
         rooms: "3",
         floors: "6-16",
         bathrooms: "2",
@@ -769,11 +793,11 @@ export function ApartmentDetail({
       virtualTourUrl: "#virtual-tour",
     },
     penthouse: {
-      title: "145.5м² G загвар",
+      title: "147.26м² G загвар",
       subtitle: "3 өрөө",
       price: "₮950,000,000 - ₮1,200,000,000",
       specs: {
-        area: "145.5м²",
+        area: "147.26м²",
         rooms: "3",
         floors: "6-16",
         bathrooms: "4",
@@ -1183,76 +1207,11 @@ export function ApartmentDetail({
             360° Панорам харагдац
           </h2>
 
-          <Tabs defaultValue="summer" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-8 h-auto p-2 bg-card border border-border rounded-xl shadow-sm">
-              <TabsTrigger
-                value="summer"
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg hover:bg-green-50 data-[state=active]:border-0"
-              >
-                <Sun className="w-4 h-4" />
-                <span className="text-sm font-medium">Зун</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="autumn"
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-white data-[state=active]:shadow-lg hover:bg-yellow-50 data-[state=active]:border-0"
-              >
-                <Leaf className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  Намар
-                </span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="winter"
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-100 data-[state=active]:to-white data-[state=active]:text-gray-800 data-[state=active]:shadow-lg hover:bg-gray-50 data-[state=active]:border-0"
-              >
-                <Snowflake className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  Өвөл
-                </span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="spring"
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-amber-700 data-[state=active]:to-amber-800 data-[state=active]:text-white data-[state=active]:shadow-lg hover:bg-amber-50 data-[state=active]:border-0"
-              >
-                <Flower className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  Хавар
-                </span>
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="summer">
-              <PanoramaViewer
-                imageUrl={panoramaImage}
-                title="Зуны харагдац"
-                season="Зун"
-              />
-            </TabsContent>
-
-            <TabsContent value="autumn">
-              <PanoramaViewer
-                imageUrl={panoramaImage}
-                title="Намрын харагдац"
-                season="Намар"
-              />
-            </TabsContent>
-
-            <TabsContent value="winter">
-              <PanoramaViewer
-                imageUrl="https://images.unsplash.com/photo-1483736762161-1d107f3c78e1?w=2048&h=1024&fit=crop&crop=center"
-                title="Өвлийн харагдац"
-                season="Өвөл"
-              />
-            </TabsContent>
-
-            <TabsContent value="spring">
-              <PanoramaViewer
-                imageUrl={panoramaImage}
-                title="Хаврын харагдац"
-                season="Хавар"
-              />
-            </TabsContent>
-          </Tabs>
+          <PanoramaViewer
+            imageUrl={panoramaImage}
+            title="Панорам харагдац"
+            season=""
+          />
         </section>
 
         {/* 4.5. 360° Virtual Tour / 360° Виртуал аялал */}
@@ -1260,7 +1219,7 @@ export function ApartmentDetail({
           <h2 className="text-3xl text-foreground mb-8">
             360° Виртуал аялал
           </h2>
-          <VirtualTour />
+          <VirtualTour url={apartment.virtualTourUrl} />
         </section>
 
         {/* 5. Loan Calculator CTA / Зээлийн тооцоолуур */}
@@ -1516,12 +1475,6 @@ export function ApartmentDetail({
                     ?.title
                 }
               </h3>
-              <p className="text-white/80 text-sm">
-                {
-                  apartment.interiorImages[fullscreenImageIndex]
-                    ?.description
-                }
-              </p>
             </div>
           </div>
 
