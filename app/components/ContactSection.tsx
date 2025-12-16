@@ -40,34 +40,39 @@ export function ContactSection() {
     setErrorMessage("");
 
     try {
-      // Prepare query parameters for GET request
-      const params = new URLSearchParams({
+      // API base URL - adjust this to match your Django server
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      
+      // Prepare data for POST request
+      const requestData = {
         service_type: formData.serviceType.join(","),
         phone: formData.phone,
         date: formData.date,
         time: formData.time,
         message: formData.message || "",
-        timestamp: new Date().toISOString(),
-      });
+      };
 
-      // Replace with your actual API endpoint
-      const apiUrl = `https://sanshop.mn/appointments/?${params.toString()}`;
+      const apiUrl = `${API_BASE_URL}/api/appointments/appointments/`;
 
-      console.log("Sending GET request to:", apiUrl);
+      console.log("Sending POST request to:", apiUrl);
+      console.log("Request data:", requestData);
 
       const response = await fetch(apiUrl, {
-        method: "GET",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          // Add authentication headers if needed
-          // 'Authorization': 'Bearer YOUR_API_TOKEN',
-          // 'X-API-Key': 'YOUR_API_KEY'
         },
+        body: JSON.stringify(requestData),
       });
 
       if (!response.ok) {
-        throw new Error(`Сервэрийн алдаа: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.detail || 
+          errorData.message || 
+          `Сервэрийн алдаа: ${response.status}`
+        );
       }
 
       const result = await response.json();
