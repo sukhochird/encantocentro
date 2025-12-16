@@ -25,10 +25,12 @@ SECRET_KEY = 'django-insecure-by^=i-sgbwy-bhtw@saq!m*fwkj3(5f25xzj#!q^c*q-i=rpe^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
+    "http://encantocentro.vercel.app"
+    "http://encantocentro.mn"
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
