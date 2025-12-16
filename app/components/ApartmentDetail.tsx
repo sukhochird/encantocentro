@@ -537,7 +537,7 @@ export function ApartmentDetail({
         "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/apart-a/A-1.jpg",
       interiorImages: aModelImages,
       panoramicView: panoramaImage,
-      virtualTourUrl: "#virtual-tour",
+      virtualTourUrl: "https://kuula.co/share/collection/7HvsZ?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.02&thumbs=3&alpha=0.87",
     },
     "1bedroom": {
       title: "209.75м² B Загвар",
