@@ -33,7 +33,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://encantocentro.mn",
     "https://encantocentro.vercel.app",
     "http://www.encantocentro.mn",
-    "https://www.encantocentro.mn"
+    "https://www.encantocentro.mn",
     "https://encantocentro.mn",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
