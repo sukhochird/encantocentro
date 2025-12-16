@@ -41,20 +41,20 @@ const amenitiesData = [
     descriptionMn:
       "Бүх насны хүүхдэд зориулсан аюулгүй, орчин үеийн тоглоомын талбай",
     image:
-      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/amenities/3.jpg",
+      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/exterior/playground/2.jpg",
     category: "outdoor",
     color: "from-green-500 to-emerald-500",
   },
   {
     id: 4,
     title: "Meeting Room",
-    titleMn: "Хурлын өрөө",
+    titleMn: "Уулзалтын өрөө",
     description:
       "Professional meeting spaces for business and community",
     descriptionMn:
       "Бизнес болон олон нийтийн уулзалтад зориулсан мэргэжлийн өрөө",
     image:
-      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/amenities/4.jpg",
+      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/5f-lobby/13.jpg",
     category: "indoor",
     color: "from-purple-500 to-violet-500",
   },
@@ -67,7 +67,7 @@ const amenitiesData = [
     descriptionMn:
       "Суралцах болон анхаарал төвлөрүүлэхэд зориулсан чимээгүй орчин",
     image:
-      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/amenities/5.jpg",
+      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/5f-lobby/10.jpg",
     category: "indoor",
     color: "from-indigo-500 to-blue-500",
   },
@@ -80,7 +80,7 @@ const amenitiesData = [
     descriptionMn:
       "Жилийн турш зугаалах боломжтой цаг уурын хяналттай дотуур тоглоомын талбай",
     image:
-      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/amenities/6.jpg",
+      "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/5f-lobby/16.jpg",
     category: "indoor",
     color: "from-pink-500 to-rose-500",
   },
