@@ -50,6 +50,16 @@ GET /api/news/articles/{id}/
 GET /api/news/articles/featured/
 ```
 
+### Давхрын төлөвлөлт (Floor Plans)
+```
+GET /api/commercial/floors/
+```
+
+### Брэндүүд (Brands)
+```
+GET /api/commercial/brands/
+```
+
 ## Admin Panel
 
 Django admin panel дээр мэдээ нэмэх, засах:
@@ -74,4 +84,31 @@ CKEditor 5 эсвэл өөр editor ашиглахыг зөвлөж байна.
 
 Frontend (Next.js) нь `http://localhost:3000` дээр ажиллах үед CORS автоматаар зөвшөөрөгдөнө. 
 Өөр порт ашиглах бол `encanto_admin/settings.py` дээр `CORS_ALLOWED_ORIGINS` засах хэрэгтэй.
+
+## Commercial API
+
+Commercial хуудасны давхрын төлөвлөлт болон брэндүүдийг Django admin-аас удирдана.
+
+### Models
+
+- **FloorPlan**: Давхрын төлөвлөлт
+  - `title`: Гарчиг
+  - `subtitle`: Дэд гарчиг (optional)
+  - `image`: Зургийн URL
+  - `order`: Дараалал (бага тоо = эхэнд харагдана)
+
+- **Brand**: Брэнд
+  - `name`: Брэндийн нэр
+  - `image`: Зургийн URL
+  - `order`: Дараалал (бага тоо = эхэнд харагдана)
+
+### Admin Panel
+
+Admin panel дээр (`http://localhost:8000/admin/`):
+- **Commercial → Floor plans**: Давхрын төлөвлөлт нэмэх, засах, устгах
+- **Commercial → Brands**: Брэнд нэмэх, засах, устгах
+- `order` талбарыг list view дээр шууд засах боломжтой (`list_editable`)
+
+**Анхаар:** Брэндүүд болон давхрын төлөвлөлт `order` талбараар эрэмбэлэгдэнэ. 
+Admin panel дээрээс дарааллыг өөрчлөх боломжтой.
 
