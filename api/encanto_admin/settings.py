@@ -145,7 +145,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # CKEditor settings
@@ -186,10 +186,13 @@ CKEDITOR_CONFIGS = {
         'resize_enabled': True,
         'filebrowserWindowHeight': 725,
         'filebrowserWindowWidth': 940,
+        'filebrowserUploadUrl': '/ckeditor/upload/',
+        'filebrowserBrowseUrl': '/ckeditor/browse/',
         'toolbarCanCollapse': True,
         'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraAllowedContent': 'iframe[*]',
+        'uploadUrl': '/ckeditor/upload/',
     },
 }
 

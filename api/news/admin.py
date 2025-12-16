@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from .models import NewsArticle
 
@@ -9,7 +9,7 @@ class NewsArticleAdminForm(forms.ModelForm):
         model = NewsArticle
         fields = '__all__'
         widgets = {
-            'content': CKEditorWidget(),
+            'content': CKEditorUploadingWidget(),
         }
 
 

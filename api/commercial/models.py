@@ -5,7 +5,7 @@ class FloorPlan(models.Model):
     """Давхрын төлөвлөлт"""
     title = models.CharField(max_length=255, verbose_name="Гарчиг")
     subtitle = models.CharField(max_length=255, blank=True, verbose_name="Дэд гарчиг")
-    image = models.URLField(max_length=500, verbose_name="Зургийн URL")
+    image = models.ImageField(upload_to='floorplans/', verbose_name="Зураг")
     order = models.IntegerField(default=0, verbose_name="Дараалал", help_text="Дарааллын тоо бага байх тусам эхэнд харагдана")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -22,7 +22,7 @@ class FloorPlan(models.Model):
 class Brand(models.Model):
     """Брэнд"""
     name = models.CharField(max_length=255, verbose_name="Брэндийн нэр")
-    image = models.URLField(max_length=500, verbose_name="Зургийн URL")
+    image = models.ImageField(upload_to='brands/', verbose_name="Зураг")
     order = models.IntegerField(default=0, verbose_name="Дараалал", help_text="Дарааллын тоо бага байх тусам эхэнд харагдана")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

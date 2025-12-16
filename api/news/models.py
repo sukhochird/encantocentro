@@ -10,7 +10,7 @@ class NewsArticle(models.Model):
     date = models.DateField(default=timezone.now, verbose_name="Огноо")
     read_time = models.CharField(max_length=20, default="5 мин", verbose_name="Унших хугацаа")
     views = models.IntegerField(default=0, verbose_name="Үзсэн тоо")
-    image = models.URLField(max_length=500, blank=True, verbose_name="Зургийн URL")
+    image = models.ImageField(upload_to='news/', blank=True, null=True, verbose_name="Зураг")
     featured = models.BooleanField(default=False, verbose_name="Онцлох")
     author = models.CharField(max_length=100, default="Энканто Сентро медиа баг", verbose_name="Зохиогч")
     tags = models.CharField(max_length=255, blank=True, help_text="Таг-уудыг таслалаар тусгаарлана", verbose_name="Таг")
