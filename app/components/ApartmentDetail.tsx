@@ -1085,7 +1085,15 @@ export function ApartmentDetail({
           </div>
         </section>
 
-        {/* 2. Floor Plan / Байрны төлөвлөгөө */}
+        {/* 2. 360° Virtual Tour / 360° Виртуал аялал */}
+        <section>
+          <h2 className="text-3xl text-foreground mb-8">
+            360° Виртуал аялал
+          </h2>
+          <VirtualTour url={apartment.virtualTourUrl} />
+        </section>
+
+        {/* 3. Floor Plan / Байрны төлөвлөгөө */}
         <section>
           <h2 className="text-3xl text-foreground mb-8">
             Байрны төлөвлөгөө
@@ -1153,7 +1161,7 @@ export function ApartmentDetail({
           </Card>
         </section>
 
-        {/* 3. Interior Images / Дотоод зурагууд */}
+        {/* 4. Interior Images / Дотоод зурагууд */}
         <section>
           <h2 className="text-3xl text-foreground mb-8">
             Дотоод засал чимэглэл
@@ -1201,7 +1209,7 @@ export function ApartmentDetail({
           )}
         </section>
 
-        {/* 4. 360° Panoramic View / 360° Панорам харагдац */}
+        {/* 4.5. 360° Panoramic View / 360° Панорам харагдац */}
         <section>
           <h2 className="text-3xl text-foreground mb-8">
             360° Панорам харагдац
@@ -1212,14 +1220,6 @@ export function ApartmentDetail({
             title="Панорам харагдац"
             season=""
           />
-        </section>
-
-        {/* 4.5. 360° Virtual Tour / 360° Виртуал аялал */}
-        <section>
-          <h2 className="text-3xl text-foreground mb-8">
-            360° Виртуал аялал
-          </h2>
-          <VirtualTour url={apartment.virtualTourUrl} />
         </section>
 
         {/* 5. Loan Calculator CTA / Зээлийн тооцоолуур */}
