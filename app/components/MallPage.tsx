@@ -8,6 +8,7 @@ import { Header } from "./Header";
 import { GoToTop } from "./GoToTop";
 import { Footer } from "./Footer";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { fetchFloorPlans, fetchBrands, type FloorPlan, type Brand } from "@/app/services/commercialApi";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -95,6 +96,14 @@ export function MallPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { scrollY } = useScroll();
 
+  // State for floors and brands from API
+  const [floors, setFloors] = useState<FloorPlan[]>([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
+  const [isLoadingFloors, setIsLoadingFloors] = useState(true);
+  const [isLoadingBrands, setIsLoadingBrands] = useState(true);
+  const [floorsError, setFloorsError] = useState<string | null>(null);
+  const [brandsError, setBrandsError] = useState<string | null>(null);
+
   // Parallax effects
   const heroY = useTransform(scrollY, [0, 500], [0, 150]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -110,6 +119,97 @@ export function MallPage() {
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // Fetch floor plans from API
+  useEffect(() => {
+    const loadFloors = async () => {
+      try {
+        setIsLoadingFloors(true);
+        setFloorsError(null);
+        const data = await fetchFloorPlans();
+        setFloors(data);
+      } catch (error) {
+        console.error("Failed to load floors from API, using fallback data:", error);
+        setFloorsError(error instanceof Error ? error.message : "Unknown error");
+        // Fallback to hardcoded data
+        setFloors([
+          {
+            id: 1,
+            title: "1-р давхар",
+            subtitle: "Дэлгүүр & Үйлчилгээ",
+            image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/1.png",
+            order: 1,
+          },
+          {
+            id: 2,
+            title: "2-р давхар",
+            subtitle: "Загвар & Амьдралын хэв маяг",
+            image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/2.png",
+            order: 2,
+          },
+          {
+            id: 3,
+            title: "3-р давхар",
+            subtitle: "Хоол & Зугаа цэнгэл",
+            image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/3.png",
+            order: 3,
+          },
+          {
+            id: 4,
+            title: "4-р давхар",
+            subtitle: "Кино & Амралт",
+            image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/4.png",
+            order: 4,
+          },
+        ]);
+      } finally {
+        setIsLoadingFloors(false);
+      }
+    };
+
+    loadFloors();
+  }, []);
+
+  // Fetch brands from API
+  useEffect(() => {
+    const loadBrands = async () => {
+      try {
+        setIsLoadingBrands(true);
+        setBrandsError(null);
+        const data = await fetchBrands();
+        setBrands(data);
+      } catch (error) {
+        console.error("Failed to load brands from API, using fallback data:", error);
+        setBrandsError(error instanceof Error ? error.message : "Unknown error");
+        // Fallback to hardcoded data
+        setBrands([
+          { id: 1, name: "Megacoffee", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/megacoffee.jpg", order: 1 },
+          { id: 2, name: "Kumo Bakery", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/kumobakery.jpg", order: 2 },
+          { id: 3, name: "Leo Patisserie", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/leopatisserie.jpg", order: 3 },
+          { id: 4, name: "Bites Co", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/bites.jpg", order: 4 },
+          { id: 5, name: "Arig Anya", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/ariganya.jpg", order: 5 },
+          { id: 6, name: "Original Marines", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/originalmarines.png", order: 6 },
+          { id: 7, name: "Miniso", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/miniso.jpg", order: 7 },
+          { id: 8, name: "Bishrelt beauty", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/bishrelt.jpg", order: 8 },
+          { id: 9, name: "Ази фарм", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/asiapharma.jpg", order: 9 },
+          { id: 10, name: "Focus Optical", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/focusoptical.jpg", order: 10 },
+          { id: 11, name: "Techsquad", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/techsquad.jpg", order: 11 },
+          { id: 12, name: "Technozone", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/technozone.jpg", order: 12 },
+          { id: 13, name: "Monos Ulaanbaatar", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/monos.jpg", order: 13 },
+          { id: 14, name: "Bala Bala", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/balabala.jpg", order: 14 },
+          { id: 15, name: "Semir", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/semir.jpg", order: 15 },
+          { id: 16, name: "Asahi", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/asahi.jpg", order: 16 },
+          { id: 17, name: "Ecovax", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/ecovacs.png", order: 17 },
+          { id: 18, name: "Astoria", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/astoria.jpg", order: 18 },
+          { id: 19, name: "TDB", image: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/tdb.jpg", order: 19 },
+        ]);
+      } finally {
+        setIsLoadingBrands(false);
+      }
+    };
+
+    loadBrands();
   }, []);
 
   // Statistics data
@@ -135,155 +235,7 @@ export function MallPage() {
     },
   ];
 
-  // Floor plan data
-  const floors = [
-    {
-      id: 1,
-      title: "1-р давхар",
-      subtitle: "Дэлгүүр & Үйлчилгээ",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/1.png",
-    },
-    {
-      id: 2,
-      title: "2-р давхар",
-      subtitle: "Загвар & Амьдралын хэв маяг",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/2.png",
-    },
-    {
-      id: 3,
-      title: "3-р давхар",
-      subtitle: "Хоол & Зугаа цэнгэл",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/3.png",
-    },
-    {
-      id: 4,
-      title: "4-р давхар",
-      subtitle: "Кино & Амралт",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/mallplan/4.png",
-    },
-  ];
-
-  // Featured brands data
-  const featuredBrands = [
-    {
-      id: 1,
-      name: "Megacoffee",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/megacoffee.jpg",
-    },
-    {
-      id: 2,
-      name: "Kumo Bakery",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/kumobakery.jpg",
-    },
-    {
-      id: 3,
-      name: "Leo Patisserie",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/leopatisserie.jpg",
-    },
-    {
-      id: 4,
-      name: "Bites Co",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/bites.jpg",
-    },
-    {
-      id: 5,
-      name: "Arig Anya",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/ariganya.jpg",
-    },
-    {
-      id: 6,
-      name: "Original Marines",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/originalmarines.png",
-    },
-    {
-      id: 7,
-      name: "Miniso",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/miniso.jpg",
-    },
-    {
-      id: 8,
-      name: "Bishrelt beauty",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/bishrelt.jpg",
-    },
-    {
-      id: 9,
-      name: "Ази фарм",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/asiapharma.jpg",
-    },
-    {
-      id: 10,
-      name: "Focus Optical",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/focusoptical.jpg",
-    },
-    {
-      id: 11,
-      name: "Techsquad",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/techsquad.jpg",
-    },
-    {
-      id: 12,
-      name: "Technozone",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/technozone.jpg",
-    },
-    {
-      id: 13,
-      name: "Monos Ulaanbaatar",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/monos.jpg",
-    },
-    {
-      id: 14,
-      name: "Bala Bala",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/balabala.jpg",
-    },
-    {
-      id: 15,
-      name: "Semir",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/semir.jpg",
-    },
-    {
-      id: 16,
-      name: "Asahi",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/asahi.jpg",
-    },
-    {
-      id: 17,
-      name: "Ecovax",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/ecovacs.png",
-    },
-    {
-      id: 18,
-      name: "Astoria",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/astoria.jpg",
-    },
-    {
-      id: 19,
-      name: "TDB",
-      image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/brands/tdb.jpg",
-    },
-  ];
+  // Use floors and brands from state (loaded from API or fallback)
 
   return (
     <div className="inter-thin">
@@ -781,18 +733,24 @@ export function MallPage() {
             viewport={{ once: true }}
           >
             <Tabs defaultValue="1" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-12">
-                {floors.map((floor) => (
-                  <TabsTrigger
-                    key={floor.id}
-                    value={floor.id.toString()}
-                  >
-                    {floor.title}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+              {isLoadingFloors ? (
+                <div className="text-center py-12">
+                  <p className="text-muted-foreground">Давхрын төлөвлөлт ачаалж байна...</p>
+                </div>
+              ) : (
+                <>
+                  <TabsList className="grid w-full grid-cols-4 mb-12">
+                    {floors.map((floor) => (
+                      <TabsTrigger
+                        key={floor.id}
+                        value={floor.id.toString()}
+                      >
+                        {floor.title}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
 
-              {floors.map((floor) => (
+                  {floors.map((floor) => (
                 <TabsContent
                   key={floor.id}
                   value={floor.id.toString()}
@@ -815,7 +773,9 @@ export function MallPage() {
                     </Card>
                   </motion.div>
                 </TabsContent>
-              ))}
+                  ))}
+                </>
+              )}
             </Tabs>
           </motion.div>
         </div>
@@ -854,8 +814,13 @@ export function MallPage() {
           </motion.div>
 
           {/* Enhanced brand grid - 4 columns with names below */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {featuredBrands.map((brand, index) => (
+          {isLoadingBrands ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Брэндүүд ачаалж байна...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {brands.map((brand, index) => (
               <motion.div
                 key={brand.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -880,8 +845,9 @@ export function MallPage() {
                   {brand.name}
                 </h3>
               </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
