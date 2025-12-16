@@ -29,8 +29,10 @@ ALLOWED_HOSTS = ['*']
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "http://encantocentro.vercel.app"
-    "http://encantocentro.mn"
+    "http://encantocentro.vercel.app",
+    "http://encantocentro.mn",
+    "https://encantocentro.vercel.app",
+    "https://encantocentro.mn",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
