@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'news',
     'commercial',
+    'appointments',
 ]
 
 MIDDLEWARE = [
