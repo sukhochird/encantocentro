@@ -77,7 +77,7 @@ export function KeyAdvantages() {
       detailDescription:
         "Оршин суугчдын тав тухтай, хурдан зорчих нөхцөлийг бүрдүүлсэн 3 ширхэг өндөр хурдны лифттэй.",
       image:
-        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/advantages/4.jpg",
+        "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/5f-lobby/kone.jpg",
       icon: ArrowUpDown,
 
       features: [
