@@ -68,7 +68,7 @@ export function News() {
   const hasMore = visibleCount < newsData.length;
 
   return (
-    <section className="py-16 bg-background">
+    <section id="мэдээ" className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12">

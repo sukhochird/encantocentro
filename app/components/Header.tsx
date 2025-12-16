@@ -31,6 +31,7 @@ export function Header({
       const sections = [
         { id: "танилцуулга" },
         { id: "орон-сууц" },
+        { id: "мэдээ" },
         { id: "уулзалт" },
       ];
 
@@ -143,13 +144,13 @@ export function Header({
                   Орон сууц
                 </button>
                 <button
-                  onClick={() => handleNavigation('уулзалт')}
-                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${activeSection === 'уулзалт'
+                  onClick={() => handleNavigation('мэдээ')}
+                  className={`font-medium px-4 py-2 rounded-full transition-all duration-200 cursor-pointer ${activeSection === 'мэдээ'
                       ? 'text-primary bg-primary/10'
                       : 'text-foreground hover:bg-accent'
                     }`}
                 >
-                  Холбоо барих
+                  Мэдээ
                 </button>
               </div>
             </nav>
@@ -170,7 +171,7 @@ export function Header({
                 onClick={() => handleNavigation('уулзалт')}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
               >
-                Уулзалт товлох
+                Холбоо барих
               </Button>
             </div>
 
@@ -243,14 +244,14 @@ export function Header({
               <button
                 onClick={() => {
                   setIsMenuOpen(false);
-                  handleNavigation('уулзалт');
+                  handleNavigation('мэдээ');
                 }}
-                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${activeSection === 'уулзалт'
+                className={`block w-full text-left font-medium px-4 py-3 rounded-xl transition-all cursor-pointer ${activeSection === 'мэдээ'
                     ? 'text-primary bg-primary/10'
                     : 'text-foreground hover:bg-accent'
                   }`}
               >
-                Холбоо барих
+                Мэдээ
               </button>
               <div className="pt-4">
                 <Button
@@ -260,7 +261,7 @@ export function Header({
                     handleNavigation('уулзалт');
                   }}
                 >
-                  Уулзалт товлох
+                  Холбоо барих
                 </Button>
               </div>
             </nav>
