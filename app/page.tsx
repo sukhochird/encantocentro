@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: "Дэлхийн №1 YUANDA брэндийн шилэн фасад бүхий тансаг зэрэглэлийн орон сууц, худалдаа үйлчилгээний төв",
     images: [
       {
-        url: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/exterior/facade/16.jpg",
+        url: "https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/exterior/facade/14.jpg",
         width: 1200,
         height: 630,
         alt: "Encanto Centro - High Rise Residence & Mall",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Encanto Centro - High Rise Residence & Mall",
     description: "Дэлхийн №1 YUANDA брэндийн шилэн фасад бүхий тансаг зэрэглэлийн орон сууц",
-    images: ["https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/exterior/facade/16.jpg"],
+    images: ["https://pub-6af6c7ad6eb64cf98a65d7fd500730d9.r2.dev/exterior/facade/14.jpg"],
   },
   robots: {
     index: true,
