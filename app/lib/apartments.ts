@@ -51,10 +51,10 @@ export const apartments: Record<string, ApartmentInfo> = {
   },
   "apart-D": {
     id: "apart-D",
-    title: "159,5м² D загвар",
+    title: "165.44м² D загвар",
     subtitle: "4 өрөө",
     modelType: "D загвар",
-    area: "159,5м²",
+    area: "165.44м²",
     rooms: "4",
     floors: "6-16",
     bathrooms: "2+1",
