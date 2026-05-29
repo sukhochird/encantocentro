@@ -602,11 +602,11 @@ export function ApartmentDetail({
       virtualTourUrl: "https://kuula.co/share/collection/7HkKN?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.02&thumbs=3&alpha=0.87",
     },
     deluxe: {
-      title: "159,5м² D загвар",
+      title: "165.44м² D загвар",
       subtitle: "4 өрөө",
       price: "₮520,000,000 - ₮560,000,000",
       specs: {
-        area: "159,5м²",
+        area: "165.44м²",
         rooms: "4",
         floors: "6-16",
         bathrooms: "2+1",
